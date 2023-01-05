@@ -5,7 +5,7 @@
   - `Design patterns`
 - With written and practical examples.
 
-# Initial
+# Pages
 ## [OOP](object_orientation.md)
 ## [Code smells](code_smells.md)
 ## [Patterns](./patterns/readme.md)
