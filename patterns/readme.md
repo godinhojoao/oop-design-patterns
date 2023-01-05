@@ -1,3 +1,6 @@
+## To use correct node version:
+- `nvm i 16 && nvm use`
+
 ## To run any code:
 - npm run pattern-name
 - example: `npm run strategy`
