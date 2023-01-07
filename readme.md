@@ -9,3 +9,4 @@
 ## [OOP](object_orientation.md)
 ## [Code smells](code_smells.md)
 ## [Patterns](./patterns/readme.md)
+## [SOLID](./solid/readme.md)
