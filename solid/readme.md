@@ -17,5 +17,5 @@
 - [SRP](./1-SingleResponsibilityPrinciple.js)
 - [OCP](./2-OpenClosedPrinciple.js)
 - [LSP](./3-LiskovSubstituitionPrinciple.js)
-- [ISP](./4-InterfaceSegregationPrinciple.js) --> not done yet
-- [DIP](./5-DependencyInversionPrinciple.js)
+- [ISP](./4-InterfaceSegregationPrinciple.ts)
+- [DIP](./5-DependencyInversionPrinciple.ts)
