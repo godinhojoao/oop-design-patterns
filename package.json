@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "strategy": "ts-node ./patterns/behavioral/Strategy.ts",
-    "factory": "ts-node ./patterns/creational/Factory.ts",
+    "factory-method": "ts-node ./patterns/creational/FactoryMethod.ts",
     "srp": "node ./solid/1-SingleResponsibilityPrinciple.js",
     "ocp": "node ./solid/2-OpenClosedPrinciple.js",
     "lsp": "node ./solid/3-LiskovSubstituitionPrinciple.js",

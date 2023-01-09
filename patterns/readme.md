@@ -4,6 +4,7 @@
 ## To run any code:
 - npm run pattern-name
 - example: `npm run strategy`
+- example: `npm run factory-method`
 
 # Design patterns
 

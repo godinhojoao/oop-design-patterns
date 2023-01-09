@@ -8,7 +8,7 @@ Factory Method allows subclasses to alter the type of objects that will be creat
 - But the "Export Method" can be optionally the same or not, what changes is the "Export Product".
 
 ## Solution
-- Factory method: A class that delegates to the subclasses the object creation.
+- Factory Method: A class that delegates to the subclasses the object creation.
 In this way the same method could return different results or "products", changing all application behaviour.
 */
 

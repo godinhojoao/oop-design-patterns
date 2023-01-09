@@ -3,6 +3,6 @@
 - These design patterns are used to instantiate classes.
 
 # Patterns
-## [Factory](./Factory.ts)
+## [Factory Method](./FactoryMethod.ts)
 
 > [Initial readme](./../../readme.md)
