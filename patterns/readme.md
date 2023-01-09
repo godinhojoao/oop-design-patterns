@@ -1,3 +1,12 @@
+# Design patterns
+- Common solutions to recurrent problems in software design.
+- Each pattern was thought to solve a specific problem, and it brings us specific problems.
+  - For example: Implementing `Strategy` we have a lot of classes. And because of that many people implement `Factory pattern`.
+
+## [Behavioral](./behavioral/readme.md)
+## [Creational](./creational/readme.md)
+<!-- ## [Structural](./structural/readme.md) -->
+
 ## To use correct node version:
 - `nvm i 16 && nvm use`
 
@@ -5,12 +14,6 @@
 - npm run pattern-name
 - example: `npm run strategy`
 - example: `npm run factory-method`
-
-# Design patterns
-
-## [Behavioral](./behavioral/readme.md)
-## [Creational](./creational/readme.md)
-<!-- ## [Structural](./structural/readme.md) -->
 
 > [Initial readme](./../readme.md)
 

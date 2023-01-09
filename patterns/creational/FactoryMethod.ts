@@ -12,7 +12,6 @@ Factory Method allows subclasses to alter the type of objects that will be creat
 In this way the same method could return different results or "products", changing all application behaviour.
 */
 
-
 // -----> WRONG: More than one responsibility, if we wanna add new file types is needed to add new if clauses
 class WrongExcelFileCreator {
   create() {

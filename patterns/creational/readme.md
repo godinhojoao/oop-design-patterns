@@ -4,5 +4,6 @@
 
 # Patterns
 ## [Factory Method](./FactoryMethod.ts)
+## [Factory Pattern](./FactoryPattern.ts)
 
 > [Initial readme](./../../readme.md)
