@@ -20,7 +20,7 @@ class Square extends Rectangle {
   }
 }
 
-// CORRECT: It's possible to change License by BusinessLicense and PersonalLicense inside all our code
+// -----> CORRECT: It's possible to change License by BusinessLicense and PersonalLicense inside all our code
 class License {
   calcFee(personAge) {
     return personAge * 1

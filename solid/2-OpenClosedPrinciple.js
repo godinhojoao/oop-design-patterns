@@ -25,7 +25,7 @@ class PeopleDao {
   }
 }
 
-// WRONG: always when we add a new model to export we have to add another if clause
+// -----> WRONG: always when we add a new model to export we have to add another if clause
 // WE ARE NOT open to extension and closed to modification
 class WrongExcelHandler {
   static generate(type) {
@@ -55,7 +55,7 @@ console.log(wrongCarsExcel) // cars.xlsx
 console.log(wrongBooksExcel) // books.xlsx
 console.log(wrongPeopleExcel) // people.xlsx
 
-// CORRECT: following OCP
+// -----> CORRECT: following OCP
 class ExcelHandler {
   static generate(dataDao) {
     const data = dataDao.query()

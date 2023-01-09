@@ -8,7 +8,7 @@
 // Let's create an system to generate the excel about the cars!!
 // But before it we need to query them.
 
-// WRONG: currently this class has two responsibilities!!!
+// -----> WRONG: currently this class has two responsibilities!!!
 class WrongExcelHandler {
   generate() {
     const cars = this.queryCars()
@@ -25,7 +25,7 @@ const wrongExcelHandler = new WrongExcelHandler()
 const wrongCarsExcel = wrongExcelHandler.generate()
 console.log(wrongCarsExcel) // cars.xlsx
 
-// CORRECT: following SRP
+// -----> CORRECT: following SRP
 class ExcelHandler {
   constructor() { }
 

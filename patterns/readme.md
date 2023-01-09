@@ -8,10 +8,8 @@
 # Design patterns
 
 ## [Behavioral](./behavioral/readme.md)
-- [Strategy](./behavioral/Strategy.ts)
-
-## [Creational theory](./creational/readme.md)
--  [Factory](./creational/Factory.ts)
+## [Creational](./creational/readme.md)
+<!-- ## [Structural](./structural/readme.md) -->
 
 > [Initial readme](./../readme.md)
 
