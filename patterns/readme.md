@@ -3,8 +3,8 @@
 - Each pattern was thought to solve a specific problem, and it brings us specific problems.
   - For example: Implementing `Strategy` we have a lot of classes. And because of that many people implement `Factory pattern`.
 
-## [Behavioral](./behavioral/readme.md)
-## [Creational](./creational/readme.md)
+## [Behavioral](./behavioral/_readme.md)
+## [Creational](./creational/_readme.md)
 <!-- ## [Structural](./structural/readme.md) -->
 
 ## To use correct node version:

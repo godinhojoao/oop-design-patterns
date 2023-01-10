@@ -6,7 +6,7 @@
 ## Description:
 - Strategy is a behavioral design pattern that lets you define a family of algorithms,
 put each of them into a separate class, and make their objects interchangeable.
-- Used to "modify" our classes and to lead with distinct situations.
+- Used to "modify" our classes and to deal with distinct situations.
 - Decrease ifs using composition ( where a class don't exist without another ).
 
 ## Problem

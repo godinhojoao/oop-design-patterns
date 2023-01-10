@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "strategy": "ts-node ./patterns/behavioral/Strategy.ts",
+    "chain-of-responsibility": "ts-node ./patterns/behavioral/ChainOfResponsibility.ts",
     "factory-method": "ts-node ./patterns/creational/FactoryMethod.ts",
     "factory-pattern": "ts-node ./patterns/creational/FactoryPattern.ts",
     "srp": "node ./solid/1-SingleResponsibilityPrinciple.js",

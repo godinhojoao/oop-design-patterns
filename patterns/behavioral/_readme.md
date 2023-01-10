@@ -5,5 +5,6 @@
 
 # Patterns
 ## [Strategy](./Strategy.ts)
+## [Chain Of Responsibility](./ChainOfResponsibility.ts)
 
 > [Initial readme](./../../readme.md)
