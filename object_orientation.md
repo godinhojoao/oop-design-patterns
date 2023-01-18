@@ -1,47 +1,44 @@
-- I will not change this to english, sorry
+# Relationships and concepts in object orientation
 
-# Relações e conceitos na orientação a objetos
-
-## Associação
-- Uma classe tem váriavel que faz referencia a instancia de outra classe ou interface.
-- Ocorre quando eles são completamente independentes entre si mas eventualmente estão relacionados.
+## Association
+- A class has a variable that references an instance of another class or interface.
+- Occurs when they are completely independent of each other but are eventually related.
 ```ts
-  // Um contrato tem um cliente
+  // A contract uses a customer
   class Contract {
     customer: Customer;
   }
 ```
 
-## Agregação
-- Uma relação um para muitos.
-- Onde um objeto é proprietário de outro, mas não há dependencia. Ambos existem isoladamente.
+## Aggregation
+- A one-to-many relationship.
+- Where one object owns another, but there is no dependency. Both exist in isolation
 ```ts
   class Customer {
     notes: Note[];
 
     addNote (note: Note) {
-      this.notes.push(note); // A Note existe sempre mesmo que o Customer não exista mais
+      this.notes.push(note); // The Note always exists even if the Customer no longer exists
     }
   }
 ```
 
-
-## Composição
-- A composição é uma agregação que possui dependência entre os objetos.
-- `Relação de morte`: Se o objeto principal for destruído os objetos que o compõe não podem existir mais.
+## Composition
+- The composition is an aggregation that has dependency between the objects.
+- `Death relation`: If the main object is destroyed, the objects that make it up can no longer exist.
 ```ts
   class Note {
     products: Product[];
 
     addProduct (productName: string) {
-      this.notes.push(new Product(productName)); // Este Product só existe nesta Note
+      this.notes.push(new Product(productName)); // This Product only exists in this Note
     }
   }
 ```
 
-## Herança
-- Uma classe herda características e/ou comportamentos de outra classe
+## Inheritance
+- A class inherits features and/or behaviors from another class
 ```ts
-  // Um financiamento de veículo é um financiamento
+  // A vehicle loan is a loan
   class CarLoan extends Loan { }
 ```
