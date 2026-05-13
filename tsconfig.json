@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "lib": ["ES2024"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
     "skipLibCheck": true,
     "outDir": "./dist"
   },

@@ -19,6 +19,7 @@ put each of them into a separate class, and make their objects interchangeable.
 - Strategy: A class that does a specific thing in many different ways
 breaking these ways in another distinct classes.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 class MathSubject {
     calculatePrice(studentAge) {
         return studentAge * 4;

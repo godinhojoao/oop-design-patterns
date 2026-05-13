@@ -12,8 +12,9 @@
 
 ## Solution
 - Chain of Responsibility: We can chain all this classes "in only one handler" and then pass this one to the client.
-Making our coude reusable.
+Making our code reusable.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 class WrongNormalPriceHandler {
     calculatePrice(productQuantity) {
         return productQuantity * 1;
@@ -49,14 +50,14 @@ class WrongClient {
         if (isTwice) {
             value = this.twicePriceHandler.calculatePrice(productQuantity);
         }
-        return `Products quantity: 2, payed value: $${value}`;
+        return `Products quantity: 2, paid value: $${value}`;
     }
 }
 const wrongNormalPriceHandler = new WrongNormalPriceHandler();
 const wrongDiscountPriceHandler = new WrongDiscountPriceHandler();
 const wrongTwicePriceHandler = new WrongTwicePriceHandler();
 const wrongClient = new WrongClient(wrongNormalPriceHandler, wrongDiscountPriceHandler, wrongTwicePriceHandler);
-console.log(wrongClient.payProducts(2, true, false)); // Products quantity: 2, payed value: $4
+console.log(wrongClient.payProducts(2, true, false)); // Products quantity: 2, paid value: $4
 class NormalPriceCalculatorHandler {
     next;
     constructor(next) {
@@ -110,13 +111,13 @@ class Client {
     }
     payProducts() {
         const value = this.handler.calculatePrice(2, this.isTwice, this.hasDiscount);
-        return `Products quantity: 2, payed value: $${value}`;
+        return `Products quantity: 2, paid value: $${value}`;
     }
 }
 const twicePriceCalculatorHandler = new TwicePriceCalculatorHandler();
 const discountPriceCalculatorHandler = new DiscountPriceCalculatorHandler(twicePriceCalculatorHandler);
 const normalPriceCalculatorHandler = new NormalPriceCalculatorHandler(discountPriceCalculatorHandler);
 const client = new Client(normalPriceCalculatorHandler, true, false); // "Improving strategy" and passing only one handler
-console.log(client.payProducts()); // Products quantity: 2, payed value: $4
+console.log(client.payProducts()); // Products quantity: 2, paid value: $4
 // In this way we have this chain:
 // 1. normalPriceCalculatorHandler -> 2. discountPriceCalculatorHandler -> 3. twicePriceCalculatorHandler

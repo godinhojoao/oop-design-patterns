@@ -9,6 +9,7 @@
 ## Solution
 - Factory Pattern: A function or class that deals with classes instantiations simplifying the objects creation.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 class HumanHandsImp {
     quantity;
     constructor(quantity) {
@@ -48,7 +49,7 @@ console.log(wrongHuman); // { hands: HumanHandsImp { quantity: 2 }, foots: Human
 console.log(wrongHuman.hands?.punch()); // quantity: 2 punch(s)
 console.log(wrongHuman.foots?.move()); // quantity: 2 move(s)
 // -----> CORRECT: Using an factory pattern class to instantiate the specific human's part
-// So if we need to pass specific props to instantiate a class, the factory method deals with it
+// So if we need to pass specific props to instantiate a class, the factory deals with it
 class HumanPartFactory {
     static create(humanProps) {
         if (humanProps.hands) {

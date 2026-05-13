@@ -3,6 +3,7 @@
  - Details should depend of abstractions.
  - Abstractions shouldn't depend of details.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 // detail
 class User {
     name;

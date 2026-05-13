@@ -6,21 +6,12 @@
   "engines": {
     "node": ">=24"
   },
-  "scripts": {
-    "strategy": "tsc && node ./dist/patterns/behavioral/Strategy.js",
-    "chain-of-responsibility": "tsc && node ./dist/patterns/behavioral/ChainOfResponsibility.js",
-    "factory-method": "tsc && node ./dist/patterns/creational/FactoryMethod.js",
-    "factory-pattern": "tsc && node ./dist/patterns/creational/FactoryPattern.js",
-    "srp": "node ./solid/1-SingleResponsibilityPrinciple.js",
-    "ocp": "node ./solid/2-OpenClosedPrinciple.js",
-    "lsp": "node ./solid/3-LiskovSubstituitionPrinciple.js",
-    "isp": "tsc && node ./dist/solid/4-InterfaceSegregationPrinciple.js",
-    "dip": "tsc && node ./dist/solid/5-DependencyInversionPrinciple.js"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^25.7.0",
     "typescript": "^5.0.0"
   }
 }

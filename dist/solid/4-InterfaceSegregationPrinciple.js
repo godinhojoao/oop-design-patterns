@@ -2,6 +2,7 @@
 // INTERFACE SEGREGATION PRINCIPLE (ISP)
 // Clients shouldn't depend of interfaces that they don't use
 // So we shouldn't obligate classes to implement interfaces unnecessary methods
+Object.defineProperty(exports, "__esModule", { value: true });
 class WrongUser {
     list() {
         const genericDto = new GenericDto();
