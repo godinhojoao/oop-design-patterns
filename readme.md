@@ -15,9 +15,9 @@ This repository covers the following topics, with written and practical examples
 ## How to run:
 
 - 1. if it's .ts file:
-  - `npx tsx filepathhere`
-  - Example: `npx tsx patterns/creational/simple-factory.ts`
-  - **OR**
   - `npx tsc` - compile
   - `node dist/patterns/creational/simple-factory.js`
+  - **OR - slower**
+  - `npx tsx filepathhere`
+  - Example: `npx tsx patterns/creational/simple-factory.ts`
 - 2. if it's .js file: `node filepathhere`
