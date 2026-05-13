@@ -6,11 +6,9 @@
 - create a simple factory class that based in the param will instantiate the required object.
 */
 
-// two types of Payment: debit or credit
 interface PaymentInput {
   createdAt: Date;
   price: number;
-  type: "debit" | "credit";
 }
 
 abstract class Payment {
@@ -36,8 +34,8 @@ class CreditPayment extends Payment {
 }
 
 class PaymentFactory {
-  static create(input: PaymentInput): Payment {
-    switch (input.type) {
+  static create(input: PaymentInput, paymentType: "debit" | "credit"): Payment {
+    switch (paymentType) {
       case "debit":
         // specific debit logic here, send mails, generate pdf, trigger events...
         return new DebitPayment(input.createdAt, input.price);
@@ -50,7 +48,7 @@ class PaymentFactory {
   }
 }
 
-const creditPayment = PaymentFactory.create({ createdAt: new Date(), type: "credit", price: 9.99 });
+const creditPayment = PaymentFactory.create({ createdAt: new Date(), price: 9.99 }, "credit");
 console.log('creditPayment', creditPayment.getPrice());
-const debitPayment = PaymentFactory.create({ createdAt: new Date(), type: "debit", price: 9 });
+const debitPayment = PaymentFactory.create({ createdAt: new Date(), price: 9.99 }, "debit");
 console.log('debitPayment', debitPayment.getPrice());
