@@ -11,7 +11,7 @@
 
 ## Solution
 - Chain of Responsibility: We can chain all this classes "in only one handler" and then pass this one to the client.
-Making our coude reusable.
+Making our code reusable.
 */
 
 // -----> WRONG: Passing all handlers and creating if clauses to verify the right one
@@ -59,7 +59,7 @@ class WrongClient {
       value = this.twicePriceHandler.calculatePrice(productQuantity)
     }
 
-    return `Products quantity: 2, payed value: $${value}`
+    return `Products quantity: 2, paid value: $${value}`
   }
 }
 
@@ -68,7 +68,7 @@ const wrongDiscountPriceHandler = new WrongDiscountPriceHandler()
 const wrongTwicePriceHandler = new WrongTwicePriceHandler()
 const wrongClient = new WrongClient(wrongNormalPriceHandler, wrongDiscountPriceHandler, wrongTwicePriceHandler)
 
-console.log(wrongClient.payProducts(2, true, false)) // Products quantity: 2, payed value: $4
+console.log(wrongClient.payProducts(2, true, false)) // Products quantity: 2, paid value: $4
 
 // -----> CORRECT: We follow the OCP principle.
 interface PriceCalculatorHandler {
@@ -121,7 +121,7 @@ class Client {
 
   payProducts() {
     const value = this.handler.calculatePrice(2, this.isTwice, this.hasDiscount)
-    return `Products quantity: 2, payed value: $${value}`
+    return `Products quantity: 2, paid value: $${value}`
   }
 }
 
@@ -130,7 +130,7 @@ const discountPriceCalculatorHandler = new DiscountPriceCalculatorHandler(twiceP
 const normalPriceCalculatorHandler = new NormalPriceCalculatorHandler(discountPriceCalculatorHandler);
 const client = new Client(normalPriceCalculatorHandler, true, false) // "Improving strategy" and passing only one handler
 
-console.log(client.payProducts()) // Products quantity: 2, payed value: $4
+console.log(client.payProducts()) // Products quantity: 2, paid value: $4
 
 // In this way we have this chain:
 // 1. normalPriceCalculatorHandler -> 2. discountPriceCalculatorHandler -> 3. twicePriceCalculatorHandler

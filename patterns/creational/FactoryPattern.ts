@@ -67,7 +67,7 @@ console.log(wrongHuman.hands?.punch()) // quantity: 2 punch(s)
 console.log(wrongHuman.foots?.move()) // quantity: 2 move(s)
 
 // -----> CORRECT: Using an factory pattern class to instantiate the specific human's part
-// So if we need to pass specific props to instantiate a class, the factory method deals with it
+// So if we need to pass specific props to instantiate a class, the factory deals with it
 class HumanPartFactory {
   static create(humanProps: { hands?: boolean, mouth?: boolean, foots?: boolean }): any {
     if (humanProps.hands) {
