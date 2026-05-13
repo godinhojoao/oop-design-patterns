@@ -1,4 +1,4 @@
-# Relationships and concepts in object orientation
+# Relationships and concepts in object oriented programming
 
 ## Association
 - A class has a variable that references an instance of another class or interface.

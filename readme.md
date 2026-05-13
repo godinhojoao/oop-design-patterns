@@ -2,19 +2,15 @@
 
 This repository covers the following topics, with written and practical examples:
 
-- `Object orientation`
+- `Object-oriented programming`
 - `Code smells`
 - `Design patterns`
 
 # Pages
 
-## [OOP](object_orientation.md)
+## [OOP](object-oriented-programming.md)
 
-## [Code smells](code_smells.md)
-
-## [Patterns](./patterns/readme.md)
-
-## [SOLID](./solid/readme.md)
+## [Code smells](code-smells.md)
 
 ## How to run:
 
