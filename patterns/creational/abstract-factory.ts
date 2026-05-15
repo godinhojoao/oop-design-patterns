@@ -1,13 +1,15 @@
 /*
+Abstract Factory = an interface to create families of related objects without exposing concrete classes.
+
 ## Problem
 - We have a family of related objects that must work together and be created together.
-- We want to ensure these objects are consistent within the same family (e.g., Credit vs Debit).
-- We also want to hide the creation logic so the client does not depend on concrete classes.
+- We want to ensure consistency between these related objects (same family).
+- We also want to avoid depending on concrete classes in the client code.
 
 ## Solution
-- Create an interface that defines a factory for all related objects (Abstract Factory).
-- For each family of objects, create a concrete factory that implements this interface.
-- The client only depends on the abstract factory and abstract products, not concrete implementations.
+- Define an abstract factory interface that declares creation methods for each product in the family.
+- Create concrete factories for each family that implement this interface.
+- The client uses only the abstract factory and product interfaces, without knowing concrete implementations.
 */
 
 interface PaymentInput {

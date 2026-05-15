@@ -1,9 +1,12 @@
 /*
-## Problem
-- We need to easily create objects without exposing the logic to do it.
+Simple Factory = a function or class that centralizes object creation and returns different objects based on input type.
 
-## Solution
-- create a simple factory class that based in the param will instantiate the required object.
+## Problem
+- We need to create objects without exposing how they are built.
+
+## Solution:
+- Use a simple factory to centralize object creation.
+- Implement it using a switch-case or a hashmap (registry) to map types to classes.
 */
 
 interface PaymentInput {

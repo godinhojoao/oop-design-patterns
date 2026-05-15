@@ -1,12 +1,15 @@
 /*
+Factory Method = subclasses decide which object to create by overriding a creation method in a base class.
+
 ## Problem
-- Beyond creating objects without exposing the logic, we also need to decouple creation from the class that uses it.
-- We need the subclasses to decide what to create (delegate object creation to subclasses).
-- Not a switch case, in this way we don't have to update switch cases if our code changes.
+- We want to create objects without exposing the creation logic.
+- We also want to let subclasses decide which object to create.
+- Avoid using switch-case in a factory that grows when new types are added.
 
 ## Solution
-- instead of a concrete class factory with a switch case (simple factory)
-- An abstract superclass that delegates to subclasses the object creation.
+- Use a factory method pattern.
+- Define an abstract class with a method for creating the object.
+- Subclasses implement that method and decide which concrete object to create.
 */
 
 interface PaymentInput {
