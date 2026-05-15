@@ -12,31 +12,31 @@
 
 interface PaymentInput {
   createdAt: Date;
-  price: number;
+  originalPrice: number;
 }
 
 abstract class Payment {
-  protected price: number;
+  protected originalPrice: number;
   protected createdAt: Date;
 
-  constructor({ createdAt, price }: PaymentInput) {
+  constructor({ createdAt, originalPrice }: PaymentInput) {
     this.createdAt = createdAt;
-    this.price = price;
+    this.originalPrice = originalPrice;
   }
 
-  abstract getPrice(): number;
+  abstract getFinalPrice(): number;
 }
 
 class CreditPayment extends Payment {
-  getPrice() {
-    return this.price;
+  getFinalPrice() {
+    return this.originalPrice;
   }
 }
 
 class DebitPayment extends Payment {
-  getPrice() {
+  getFinalPrice() {
     const discount = 0.1;
-    return this.price * (1 - discount);
+    return this.originalPrice * (1 - discount);
   }
 }
 
@@ -91,12 +91,12 @@ class Checkout {
   private receipt: Receipt;
 
   constructor(factory: BillingFactory) {
-    const input = { createdAt: new Date(), price: 100 }; // calulate based on checkout products
+    const input = { createdAt: new Date(), originalPrice: 100 }; // calulate based on checkout products
 
     this.payment = factory.createPayment(input);
     this.receipt = factory.createReceipt();
 
-    console.log("payment price:", this.payment.getPrice());
+    console.log("payment price:", this.payment.getFinalPrice());
     console.log("receipt:", this.receipt.getInfo());
   }
 }

@@ -8,28 +8,28 @@
 
 interface PaymentInput {
   createdAt: Date;
-  price: number;
+  originalPrice: number;
 }
 
 abstract class Payment {
   constructor(
     protected createdAt: Date,
-    protected price: number
+    protected originalPrice: number
   ) { }
 
-  abstract getPrice(): number;
+  abstract getFinalPrice(): number;
 }
 
 class DebitPayment extends Payment {
-  getPrice() {
+  getFinalPrice() {
     const discount = 0.1; // 10%
-    return this.price * (1 - discount);
+    return this.originalPrice * (1 - discount);
   }
 }
 
 class CreditPayment extends Payment {
-  getPrice() {
-    return this.price; // no discount
+  getFinalPrice() {
+    return this.originalPrice; // no discount
   }
 }
 
@@ -38,17 +38,17 @@ class PaymentFactory {
     switch (paymentType) {
       case "debit":
         // specific debit logic here, send mails, generate pdf, trigger events...
-        return new DebitPayment(input.createdAt, input.price);
+        return new DebitPayment(input.createdAt, input.originalPrice);
       case "credit":
         // specific credit logic here, trigger events...
-        return new CreditPayment(input.createdAt, input.price);
+        return new CreditPayment(input.createdAt, input.originalPrice);
       default:
         throw new Error("invalid type");
     }
   }
 }
 
-const creditPayment = PaymentFactory.create({ createdAt: new Date(), price: 9.99 }, "credit");
-console.log('creditPayment', creditPayment.getPrice());
-const debitPayment = PaymentFactory.create({ createdAt: new Date(), price: 9.99 }, "debit");
-console.log('debitPayment', debitPayment.getPrice());
+const creditPayment = PaymentFactory.create({ createdAt: new Date(), originalPrice: 9.99 }, "credit");
+console.log('creditPayment', creditPayment.getFinalPrice());
+const debitPayment = PaymentFactory.create({ createdAt: new Date(), originalPrice: 9.99 }, "debit");
+console.log('debitPayment', debitPayment.getFinalPrice());

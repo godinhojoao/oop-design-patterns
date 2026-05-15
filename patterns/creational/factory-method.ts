@@ -11,28 +11,28 @@
 
 interface PaymentInput {
   createdAt: Date;
-  price: number;
+  originalPrice: number;
 }
 
 abstract class Payment {
   constructor(
     protected createdAt: Date,
-    protected price: number
+    protected originalPrice: number
   ) { }
 
-  abstract getPrice(): number;
+  abstract getFinalPrice(): number;
 }
 
 class DebitPayment extends Payment {
-  getPrice() {
+  getFinalPrice() {
     const discount = 0.1; // 10%
-    return this.price * (1 - discount);
+    return this.originalPrice * (1 - discount);
   }
 }
 
 class CreditPayment extends Payment {
-  getPrice() {
-    return this.price; // no discount
+  getFinalPrice() {
+    return this.originalPrice; // no discount
   }
 }
 
@@ -43,21 +43,21 @@ abstract class PaymentProcessor {
   process(paymentInput: PaymentInput) {
     const currentPayment = this.createPayment(paymentInput);
     console.log('currentPayment', currentPayment)
-    console.log(`removing value U$${currentPayment.getPrice()} from account.`);
+    console.log(`removing value U$${currentPayment.getFinalPrice()} from account.`);
   }
 }
 
 class DebitPaymentProcessor extends PaymentProcessor {
   createPayment(paymentInput: PaymentInput): Payment {
-    return new DebitPayment(paymentInput.createdAt, paymentInput.price);
+    return new DebitPayment(paymentInput.createdAt, paymentInput.originalPrice);
   }
 }
 
 class CreditPaymentProcessor extends PaymentProcessor {
   createPayment(paymentInput: PaymentInput): Payment {
-    return new CreditPayment(paymentInput.createdAt, paymentInput.price);
+    return new CreditPayment(paymentInput.createdAt, paymentInput.originalPrice);
   }
 }
 
-new CreditPaymentProcessor().process({ createdAt: new Date(), price: 9.99 });
-new DebitPaymentProcessor().process({ createdAt: new Date(), price: 9.99 });
+new CreditPaymentProcessor().process({ createdAt: new Date(), originalPrice: 9.99 });
+new DebitPaymentProcessor().process({ createdAt: new Date(), originalPrice: 9.99 });
