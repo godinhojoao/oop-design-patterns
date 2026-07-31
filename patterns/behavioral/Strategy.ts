@@ -1,7 +1,7 @@
 /*
 ## Summary:
 - Encapsulates an algorithm inside a class
-- Capture the abstraction in an interface, and put implementation details in derived classes.
+- Capture the abstraction into an interface, and put implementation details in derived classes.
 
 ## Description:
 - Strategy is a behavioral design pattern that lets you define a family of algorithms,
@@ -19,17 +19,17 @@ put each of them into a separate class, and make their objects interchangeable.
 breaking these ways in another distinct classes.
 */
 
-interface Subject {
+interface SubjectPricingStrategy {
   calculatePrice: (studentAge: number) => number;
 }
 
-class MathSubject implements Subject {
+class MathPricingStrategy implements SubjectPricingStrategy {
   calculatePrice(studentAge: number): number {
     return studentAge * 4
   };
 }
 
-class GeoSubject implements Subject {
+class GeoPricingStrategy implements SubjectPricingStrategy {
   calculatePrice(studentAge: number): number {
     return studentAge * 3
   };
@@ -38,16 +38,16 @@ class GeoSubject implements Subject {
 class Student {
   constructor(
     private readonly age: number,
-    private readonly subject: Subject // this is the "Strategy Class"
+    private readonly subjectPricing: SubjectPricingStrategy
   ) { }
 
   getSubjectPrice(): number {
-    return this.subject.calculatePrice(this.age)
+    return this.subjectPricing.calculatePrice(this.age)
   }
 }
 
-const johnMath1 = new Student(10, new MathSubject())
+const johnMath1 = new Student(10, new MathPricingStrategy())
 console.log('john1Math.getSubjectPrice', johnMath1.getSubjectPrice()) // 40
 
-const johnGeo1 = new Student(10, new GeoSubject())
+const johnGeo1 = new Student(10, new GeoPricingStrategy())
 console.log('johnGeo1.getSubjectPrice', johnGeo1.getSubjectPrice()) // 30

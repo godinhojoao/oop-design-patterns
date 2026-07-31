@@ -1,136 +1,83 @@
 /*
-## Description:
-- Avoids coupling between who needs a specific action and the executor of its action.
-- Chaining the receiver objects of this action until an object handle the action.
-- Each handler decides either to process the request OR to pass it to the next handler in the chain.
-- A handler can decide not to pass the request further down the chain and effectively stop.
+Chain of Responsibility = a sequence of handlers linked in a specific order, where each handler decides
+if it processes the request or passes it to the next handler in the chain.
 
 ## Problem
-- We have one treatment for each different received param and we've implemented a specific class for each one.
-- Now we need to pass a lot of classes for our client class constructor.
+- We have multiple handlers that need to run in order to handle a request, and not all of them run every time.
+- Any handler can stop the chain and return, or pass the request forward.
 
 ## Solution
-- Chain of Responsibility: We can chain all this classes "in only one handler" and then pass this one to the client.
-Making our code reusable.
+- Create an abstract class that holds a reference to the next handler and forces subclasses to implement the handling logic.
+- The base class has an "execute" method that runs the current handler and then either forwards the request to the next one or
+short circuits and returns the response.
 */
+type Context = { payload: { name: string }, response?: string; }
+type HandleResult = { context: Context, hasStopped: boolean };
 
-// -----> WRONG: Passing all handlers and creating if clauses to verify the right one
-interface WrongCalculatorHandler {
-  calculatePrice(productQuantity: number): number;
-}
+abstract class Middleware {
+  protected next?: Middleware;
 
-class WrongNormalPriceHandler implements WrongCalculatorHandler {
-  calculatePrice(productQuantity: number): number {
-    return productQuantity * 1
+  protected abstract handle(context: Context): HandleResult
+
+  public setNext(middleware: Middleware): Middleware {
+    this.next = middleware;
+    return this.next;
+  }
+
+  public execute(context: Omit<Context, 'response'>): Context {
+    const res = this.handle(context);
+    if (res.hasStopped) { return res.context; }
+    return this.next?.execute(res.context) ?? res.context;
   }
 }
 
-class WrongDiscountPriceHandler implements WrongCalculatorHandler {
-  calculatePrice(productQuantity: number): number {
-    return productQuantity * .5
-  }
-}
+class ValidationMiddleware extends Middleware {
+  private readonly NAME_MAX_LENGTH = 10;
 
-class WrongTwicePriceHandler implements WrongCalculatorHandler {
-  calculatePrice(productQuantity: number): number {
-    return productQuantity * 2
-  }
-}
-
-class WrongClient {
-  constructor(
-    private readonly normalPriceHandler: WrongCalculatorHandler,
-    private readonly discountPriceHandler: WrongCalculatorHandler,
-    private readonly twicePriceHandler: WrongCalculatorHandler
-  ) { }
-
-  payProducts(productQuantity: number, isTwice: boolean, hasDiscount: boolean) {
-    let value = 0;
-
-    if (!isTwice && !hasDiscount) {
-      value = this.normalPriceHandler.calculatePrice(productQuantity)
+  protected handle(context: Context): HandleResult {
+    if (context.payload.name.length > this.NAME_MAX_LENGTH) {
+      context.response = `400 - name max length of ${this.NAME_MAX_LENGTH} exceeded`;
+      return { context, hasStopped: true };
     }
 
-    if (hasDiscount) {
-      value = this.discountPriceHandler.calculatePrice(productQuantity)
-    }
-
-    if (isTwice) {
-      value = this.twicePriceHandler.calculatePrice(productQuantity)
-    }
-
-    return `Products quantity: 2, paid value: $${value}`
+    return { context, hasStopped: false };
   }
 }
 
-const wrongNormalPriceHandler = new WrongNormalPriceHandler()
-const wrongDiscountPriceHandler = new WrongDiscountPriceHandler()
-const wrongTwicePriceHandler = new WrongTwicePriceHandler()
-const wrongClient = new WrongClient(wrongNormalPriceHandler, wrongDiscountPriceHandler, wrongTwicePriceHandler)
+class AuthMiddleware extends Middleware {
+  private readonly AUTHORIZED_USERS = ["admin", "admin2"];
 
-console.log(wrongClient.payProducts(2, true, false)) // Products quantity: 2, paid value: $4
-
-// -----> CORRECT: We follow the OCP principle.
-interface PriceCalculatorHandler {
-  next?: PriceCalculatorHandler;
-  calculatePrice(productQuantity: number, isTwice: boolean, hasDiscount: boolean): number;
-}
-
-class NormalPriceCalculatorHandler implements PriceCalculatorHandler {
-  constructor(public next?: PriceCalculatorHandler) { }
-
-  calculatePrice(productQuantity: number, isTwice: boolean, hasDiscount: boolean): number {
-    if (!isTwice && !hasDiscount) {
-      return productQuantity * 1
+  protected handle(context: Context): HandleResult {
+    if (!this.AUTHORIZED_USERS.includes(context.payload.name)) {
+      context.response = "401 - unauthorized user";
+      return { context, hasStopped: true };
     }
-    if (!this.next) throw new Error('Invalid handler')
-    return this.next.calculatePrice(productQuantity, isTwice, hasDiscount)
+
+    return { context, hasStopped: false };
   }
 }
 
-class DiscountPriceCalculatorHandler implements PriceCalculatorHandler {
-  constructor(public next?: PriceCalculatorHandler) { }
-
-  calculatePrice(productQuantity: number, isTwice: boolean, hasDiscount: boolean): number {
-    if (hasDiscount) {
-      return productQuantity * .5
-    }
-    if (!this.next) throw new Error('Invalid handler')
-    return this.next.calculatePrice(productQuantity, isTwice, hasDiscount)
+class OrdersRoute extends Middleware {
+  protected handle(context: Context): HandleResult {
+    context.response = "order successfully processed";
+    return { context, hasStopped: true };
   }
 }
 
-class TwicePriceCalculatorHandler implements PriceCalculatorHandler {
-  constructor(public next?: PriceCalculatorHandler) { }
+const chain = new ValidationMiddleware();
+chain
+  .setNext(new AuthMiddleware())
+  .setNext(new OrdersRoute());
 
-  calculatePrice(productQuantity: number, isTwice: boolean, hasDiscount: boolean): number {
-    if (isTwice) {
-      return productQuantity * 2
-    }
-    if (!this.next) throw new Error('Invalid handler')
-    return this.next.calculatePrice(productQuantity, isTwice, hasDiscount)
-  }
-}
+const invalidPayloadSize = { payload: { name: "joao123456789" } };
+const validSizeButUnauthorized = { payload: { name: "joao" } };
+const validAndAuthorized = { payload: { name: "admin" } };
 
-class Client {
-  constructor(
-    private readonly handler: PriceCalculatorHandler,
-    private readonly isTwice: boolean,
-    private readonly hasDiscount: boolean
-  ) { }
+const invalidSizeRes = chain.execute(invalidPayloadSize);
+console.log('invalidSizeRes', invalidSizeRes)
 
-  payProducts() {
-    const value = this.handler.calculatePrice(2, this.isTwice, this.hasDiscount)
-    return `Products quantity: 2, paid value: $${value}`
-  }
-}
+const unauthorizedRes = chain.execute(validSizeButUnauthorized);
+console.log('unauthorizedRes', unauthorizedRes)
 
-const twicePriceCalculatorHandler = new TwicePriceCalculatorHandler();
-const discountPriceCalculatorHandler = new DiscountPriceCalculatorHandler(twicePriceCalculatorHandler);
-const normalPriceCalculatorHandler = new NormalPriceCalculatorHandler(discountPriceCalculatorHandler);
-const client = new Client(normalPriceCalculatorHandler, true, false) // "Improving strategy" and passing only one handler
-
-console.log(client.payProducts()) // Products quantity: 2, paid value: $4
-
-// In this way we have this chain:
-// 1. normalPriceCalculatorHandler -> 2. discountPriceCalculatorHandler -> 3. twicePriceCalculatorHandler
+const authorizedRes = chain.execute(validAndAuthorized);
+console.log('authorizedRes', authorizedRes)
