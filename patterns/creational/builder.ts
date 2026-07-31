@@ -64,8 +64,8 @@ interface Billing<P extends Payment> {
 }
 
 interface BillingBuilder {
-  setPayment(payment: Payment): this;
-  setReceipt(receipt: string): this;
+  setPayment(payment: Payment): this; // return this for chaining build steps
+  setReceipt(receipt: string): this; // return this for chaining build steps
   reset(): void;
   build(): Billing<Payment>;
 }
@@ -118,8 +118,9 @@ class BillingDirectorImpl implements BillingDirector {
 
     const payment = new CreditPayment({ originalPrice });
 
-    builder.setPayment(payment);
-    builder.setReceipt(`credit -> ${payment.getFinalPrice()}`);
+    builder
+      .setPayment(payment)
+      .setReceipt(`credit -> ${payment.getFinalPrice()}`); // chaining build steps
   }
 
   makeDebitBilling(originalPrice: number, builder: BillingBuilder): void {
@@ -127,8 +128,9 @@ class BillingDirectorImpl implements BillingDirector {
 
     const payment = new DebitPayment({ originalPrice });
 
-    builder.setPayment(payment);
-    builder.setReceipt(`debit -> ${payment.getFinalPrice()}`);
+    builder
+      .setPayment(payment)
+      .setReceipt(`debit -> ${payment.getFinalPrice()}`);
   }
 }
 

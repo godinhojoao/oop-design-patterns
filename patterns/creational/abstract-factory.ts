@@ -7,7 +7,7 @@ Abstract Factory = an interface to create families of related objects without ex
 - We also want to avoid depending on concrete classes in the client code.
 
 ## Solution
-- Define an abstract factory interface that declares creation methods for each product in the family.
+- Define a factory interface that declares creation methods for each product in the family.
 - Create concrete factories for each family that implement this interface.
 - The client uses only the abstract factory and product interfaces, without knowing concrete implementations.
 */
