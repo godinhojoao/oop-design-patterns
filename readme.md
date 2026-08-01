@@ -6,18 +6,31 @@ This repository covers the following topics, with written and practical examples
 - `Code smells`
 - `Design patterns`
 
+## How to run:
+
+- `.ts` file: `npx tsx filepathhere` (compiles + runs in one step)
+  - Example: `npx tsx patterns/creational/simple-factory.ts`
+- `.js` file: `node filepathhere`
+
 # Pages
 
 ## [OOP](object-oriented-programming.md)
 
 ## [Code smells](code-smells.md)
 
-## How to run:
+## Patterns
 
-- 1. if it's .ts file:
-  - `npx tsc` - compile
-  - `node dist/patterns/creational/simple-factory.js`
-  - **OR - slower**
-  - `npx tsx filepathhere`
-  - Example: `npx tsx patterns/creational/simple-factory.ts`
-- 2. if it's .js file: `node filepathhere`
+### Creational
+
+- [Simple Factory](patterns/creational/simple-factory.ts)
+- [Factory Method](patterns/creational/factory-method.ts)
+- [Abstract Factory](patterns/creational/abstract-factory.ts)
+- [Builder](patterns/creational/builder.ts)
+- [Singleton](patterns/creational/singleton.ts)
+
+### Behavioral
+
+- [Chain of Responsibility](patterns/behavioral/ChainOfResponsibility.ts)
+- [Command](patterns/behavioral/Command.ts)
+- [Observer](patterns/behavioral/Observer.ts)
+- [Strategy](patterns/behavioral/Strategy.ts)
