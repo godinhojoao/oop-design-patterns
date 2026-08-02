@@ -1,5 +1,6 @@
 /*
-Command = turn actions (requests) into an object that contains all info about the request and add new capabilities to it, such as undo action, adding a delay, processing into a queue, and more.
+Command = turn actions (requests) into an object that contains all info about the request and
+add new capabilities to it, such as undo action, adding a delay, processing into a queue, and more.
 
 ## Problem
 - We have actions like "cancel order" or "send email" that we want to trigger from different places (HTTP, queue, CLI).
