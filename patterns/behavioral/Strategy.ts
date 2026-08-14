@@ -51,3 +51,15 @@ console.log('john1Math.getSubjectPrice', johnMath1.getSubjectPrice()) // 40
 
 const johnGeo1 = new Student(10, new GeoPricingStrategy())
 console.log('johnGeo1.getSubjectPrice', johnGeo1.getSubjectPrice()) // 30
+
+
+// or in modern languages such as TS using lambda functions
+type CalculateFunc = (a: number, b: number) => number;
+const sum = (a: number, b: number) => a + b;
+const multiply = (a: number, b: number) => a * b;
+const calculate = (a: number, b: number, func: CalculateFunc) => func(a, b);
+
+const sumRes = calculate(10, 2, sum);
+const multRes = calculate(10, 2, multiply);
+console.log('sumRes', sumRes)
+console.log('multRes', multRes)
