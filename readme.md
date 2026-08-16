@@ -32,5 +32,25 @@ This repository covers the following topics, with written and practical examples
 
 - [Chain of Responsibility](patterns/behavioral/ChainOfResponsibility.ts)
 - [Command](patterns/behavioral/Command.ts)
+- [Iterator](patterns/behavioral/Iterator.ts)
+- [Mediator](patterns/behavioral/Mediator.ts)
+- [Memento](patterns/behavioral/Memento.ts)
 - [Observer](patterns/behavioral/Observer.ts)
+- [State](patterns/behavioral/State.ts)
 - [Strategy](patterns/behavioral/Strategy.ts)
+- [Template Method](patterns/behavioral/TemplateMethod.ts)
+- [Visitor](patterns/behavioral/Visitor.ts)
+
+### Structural
+
+- [Adapter](patterns/structural/Adapter.ts)
+- [Decorator](patterns/structural/Decorator.ts)
+- [Proxy](patterns/structural/Proxy.ts)
+- [Facade](patterns/structural/Facade.ts)
+- [Composite](patterns/structural/Composite.ts)
+- [Bridge](patterns/structural/Bridge.ts)
+- [Flyweight](patterns/structural/Flyweight.ts)
+
+## Reference
+
+- [Refactoring Guru](https://refactoring.guru/)
