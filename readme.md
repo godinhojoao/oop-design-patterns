@@ -14,10 +14,6 @@ This repository covers the following topics, with written and practical examples
 
 # Pages
 
-## [OOP](object-oriented-programming.md)
-
-## [Code smells](code-smells.md)
-
 ## Patterns
 
 ### Creational
@@ -50,6 +46,10 @@ This repository covers the following topics, with written and practical examples
 - [Composite](patterns/structural/Composite.ts)
 - [Bridge](patterns/structural/Bridge.ts)
 - [Flyweight](patterns/structural/Flyweight.ts)
+
+## [OOP](object-oriented-programming.md)
+
+## [Code smells](code-smells.md)
 
 ## Reference
 
